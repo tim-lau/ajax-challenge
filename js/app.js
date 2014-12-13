@@ -10,8 +10,7 @@ angular.module('ResponseApp', ['ui.bootstrap'])
 
     .controller('ResponseController', function($scope, $http) {
         $scope.newComment = {
-            score: 0,
-            downvote: true
+            score: 0
         };
 
         // Submits a new comment to Parse
@@ -28,8 +27,7 @@ angular.module('ResponseApp', ['ui.bootstrap'])
                 })
                 .finally(function() {
                     $scope.newComment = {
-                        score: 0,
-                        downvote: true
+                        score: 0
                     };
                     $scope.loading = false;
                     $scope.updateComments();
@@ -51,6 +49,7 @@ angular.module('ResponseApp', ['ui.bootstrap'])
                 	$scope.form.$setPristine();
                     $scope.loading = false;
                 });
+                
         };
 
         $scope.updateComments();

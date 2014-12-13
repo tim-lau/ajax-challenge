@@ -50,6 +50,7 @@
 
             <section>
                 <h2>Comments <img ng-show="loading" id="ajax-loader" src="img/ajax-spinner.gif" alt="Loading list of comments"/></h2>
+                <p ng-show="comments.length == 0">There are no reviews here, why don't you add one?</p>
                 <table class="table table-hover">
                     <thead>
                     <tr>
