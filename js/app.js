@@ -11,6 +11,7 @@ angular.module('ResponseApp', ['ui.bootstrap'])
     .controller('ResponseController', function($scope, $http) {
         $scope.newComment = {
             score: 0,
+            downvote: true
         };
 
         // Submits a new comment to Parse
@@ -28,6 +29,7 @@ angular.module('ResponseApp', ['ui.bootstrap'])
                 .finally(function() {
                     $scope.newComment = {
                         score: 0,
+                        downvote: true
                     };
                     $scope.loading = false;
                     $scope.updateComments();
@@ -52,6 +54,28 @@ angular.module('ResponseApp', ['ui.bootstrap'])
         };
 
         $scope.updateComments();
+
+        // Modifies comment score by set amount
+        $scope.modifyScore = function(comment, amount) {
+            var scoreData = {
+                score: {
+                    __op: "Increment",
+                    amount: amount
+                }
+            };
+            $scope.loading = true;
+            $http.put(responseUrl + '/' + comment.objectId, scoreData)
+                .success(function(responseData) {
+                    comment.score = responseData.score;
+                })
+                .error (function(err) {
+                	$scope.errorMessage = err;
+                    console.log(err);
+                })
+                .finally(function() {
+                    $scope.loading = false;
+                });
+        };
 
         // Removes comment from comment list via Parse
         $scope.removeComment = function(comment) {

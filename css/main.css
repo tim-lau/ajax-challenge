@@ -11,3 +11,8 @@ body {
     margin-right: 10px;
 }
 
+.form-group .control-label:after { 
+   content:"*";
+   color:red;
+}
+
